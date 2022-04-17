@@ -51,7 +51,7 @@ class _CurrentWeatherState extends State<CurrentWeather> {
             widget.weather!.weather![0].description.toString(),
             style: GoogleFonts.lato(
               color: Colors.white70,
-              fontSize: 22,
+              fontSize: 28,
               fontWeight: FontWeight.w600,
             ),
           ),
@@ -87,28 +87,31 @@ class _CurrentWeatherState extends State<CurrentWeather> {
             height: 0,
           ),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Expanded(
-                  flex: 1,
-                  child: CurrentWeatherDataUnit(
-                      height: widget.height!,
-                      name: "WIND",
-                      value:
-                          "${widget.weather!.wind!.speed.toString()}\u00b0")),
-              SizedBox(
-                height: (widget.height! * 0.1),
-                child: const VerticalDivider(
-                  color: Colors.white,
-                ),
+              Padding(
+                padding: const EdgeInsets.only(right: 25),
+                child: CurrentWeatherDataUnit(
+                    image: "assets/images/09d.png",
+                    height: widget.height!,
+                    name: "WIND",
+                    value: "${widget.weather!.wind!.speed.toString()}\u00b0"),
               ),
-              Expanded(
-                  flex: 1,
-                  child: CurrentWeatherDataUnit(
-                      height: widget.height!,
-                      name: "FEELS LIKE",
-                      value:
-                          "${(widget.weather!.main!.feelsLike! - 273.15).ceil().toString()}kwj")),
+              // SizedBox(
+              //   height: (widget.height! * 0.1),
+              //   child: const VerticalDivider(
+              //     color: Colors.white,
+              //   ),
+              // ),
+              Padding(
+                padding: const EdgeInsets.only(left: 25.0),
+                child: CurrentWeatherDataUnit(
+                    image: "assets/images/10d@2x.png",
+                    height: widget.height!,
+                    name: "FEELS LIKE",
+                    value:
+                        "${(widget.weather!.main!.feelsLike! - 273.15).ceil().toString()}kwj"),
+              ),
             ],
           ),
           const Divider(
@@ -117,27 +120,30 @@ class _CurrentWeatherState extends State<CurrentWeather> {
             height: 0,
           ),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Expanded(
-                  flex: 1,
-                  child: CurrentWeatherDataUnit(
-                      height: widget.height!,
-                      name: "INDEX UV",
-                      value: "${widget.weather!.wind!.speed.toString()}kwj")),
-              SizedBox(
-                height: (widget.height! * 0.1),
-                child: const VerticalDivider(
-                  color: Colors.white,
-                ),
+              Padding(
+                padding: const EdgeInsets.only(right: 12.0),
+                child: CurrentWeatherDataUnit(
+                    image: "assets/images/13n.png",
+                    height: widget.height!,
+                    name: "INDEX UV",
+                    value: "${widget.weather!.wind!.speed.toString()}kwj"),
               ),
-              Expanded(
-                  flex: 1,
-                  child: CurrentWeatherDataUnit(
-                      height: widget.height!,
-                      name: "PRESSURE",
-                      value:
-                          "${widget.weather!.main!.pressure.toString()}mbar")),
+              // SizedBox(
+              //   height: (widget.height! * 0.1),
+              //   child: const VerticalDivider(
+              //     color: Colors.white,
+              //   ),
+              // ),
+              Padding(
+                padding: const EdgeInsets.only(left: 12.0),
+                child: CurrentWeatherDataUnit(
+                    image: "assets/images/50d.png",
+                    height: widget.height!,
+                    name: "PRESSURE",
+                    value: "${widget.weather!.main!.pressure.toString()}mbar"),
+              ),
             ],
           ),
         ],

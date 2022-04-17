@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
-class WeekForecast extends StatelessWidget {
+class WeekForecast extends StatefulWidget {
   const WeekForecast({
     Key? key,
     required this.height,
@@ -18,24 +18,29 @@ class WeekForecast extends StatelessWidget {
   final double width;
 
   @override
+  State<WeekForecast> createState() => _WeekForecastState();
+}
+
+class _WeekForecastState extends State<WeekForecast> {
+  @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: height * 0.75,
-      width: width,
+      height: widget.height * 0.75,
+      width: widget.width,
       child: ListView.builder(
-        itemCount: weekForecastEntity!.daily!.length,
+        itemCount: widget.weekForecastEntity!.daily!.length,
         itemBuilder: (context, index) {
-          var dt = DateTime.fromMillisecondsSinceEpoch(
-              weekForecastEntity!.daily![index].dt!);
+          var dt = DateTime.fromMillisecondsSinceEpoch(widget.weekForecastEntity!.daily![index].dt!);
           var dD = DateFormat('EEE,').format(dt);
           var dM = DateFormat('d MMM').format(dt);
-          print(dD + dM);
+
           return ListTile(
-            leading: weekForecastEntity!.daily![index].weather![0].icon == null
+            contentPadding: const EdgeInsets.only(left: 0),
+            leading: widget.weekForecastEntity!.daily![index].weather![0].icon == null
                 ? Image.network("http://openweathermap.org/img/wn/04d.png",
                     height: 35)
                 : Image.network(
-                    "$weatherIconUrl/${weekForecastEntity!.daily![index].weather![0].icon}.png",
+                    "$weatherIconUrl/${widget.weekForecastEntity!.daily![index].weather![0].icon}.png",
                     height: 35),
             title: SizedBox(
               child: Row(
@@ -61,13 +66,13 @@ class WeekForecast extends StatelessWidget {
               ),
             ),
             trailing: SizedBox(
-              width: width * 0.2,
+              width: widget.width * 0.2,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   Text(
-                    (weekForecastEntity!.daily![index].temp!.min! - 273.15)
+                    (widget.weekForecastEntity!.daily![index].temp!.min! - 273.15)
                         .round()
                         .toString(),
                     style: GoogleFonts.lato(
@@ -77,7 +82,7 @@ class WeekForecast extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    "/${(weekForecastEntity!.daily![index].temp!.max! - 273.15).round().toString()}\u00b0",
+                    "/${(widget.weekForecastEntity!.daily![index].temp!.max! - 273.15).round().toString()}\u00b0",
                     style: GoogleFonts.lato(
                       fontSize: 14,
                       color: Colors.white54,
