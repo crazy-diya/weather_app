@@ -19,77 +19,82 @@ class CurrentWeatherView extends StatefulWidget {
 class _CurrentWeatherViewState extends State<CurrentWeatherView> {
   final bloc = sl<CurrentWeatherBloc>();
   final bloc2 = sl<CurrentWeatherBloc>();
+
   @override
   Widget build(BuildContext context) {
-    final height = MediaQuery
-        .of(context)
-        .size
-        .height;
-    final width = MediaQuery
-        .of(context)
-        .size
-        .width;
+    final height = MediaQuery.of(context).size.height;
+    final width = MediaQuery.of(context).size.width;
     return SafeArea(
       child: Scaffold(
         appBar: buildAppBar(),
-        body:  Column(
+        body: Column(
           children: [
-            Expanded(flex: 7,child: buildBody()),
-            Expanded(flex: 3,child: buildBottom()),
+            Expanded(flex: 7, child: buildBody()),
+            Expanded(flex: 3, child: buildBottom()),
           ],
         ),
       ),
     );
   }
+
   BlocProvider<CurrentWeatherBloc> buildBody() {
-    return BlocProvider(create: (_) => bloc,
+    return BlocProvider(
+      create: (_) => bloc,
       child: BlocBuilder<CurrentWeatherBloc, CurrentWeatherState>(
           builder: (context, state) {
-            if (state is CurrentWeatherInitial) {
-              _dispatchInit(context);
-              return const Center(child: CupertinoActivityIndicator(color: Colors.red,radius: 25));
-            }else if(state is CurrentWeatherLoadingState){
-              return const Center(child: CupertinoActivityIndicator(color: Colors.green,radius: 25));
-            }else if(state is CurrentWeatherLoadedState){
-              return CurrentWeatherBody(responseCurrentWeatherEntity: state.responseCurrentWeatherEntity);
-            }else if(state is CurrentWeatherErrorState){
-              return ErrorWidget(state.errorMessage.toString());
-            }
-            return ErrorWidget("Unexpected Error occurred!");
-          }),);
-  }
-
-  BlocProvider<CurrentWeatherBloc> buildBottom() {
-    return BlocProvider(create: (_) => bloc2,
-    child: BlocBuilder<CurrentWeatherBloc, CurrentWeatherState>(
-      builder: (context, state) {
         if (state is CurrentWeatherInitial) {
-          _dispatchInit2(context);
-          return const Center(child: CupertinoActivityIndicator(color: Colors.red,radius: 25));
-        }else if(state is CurrentWeatherLoadingState){
-          return const Center(child: CupertinoActivityIndicator(color: Colors.green,radius: 25));
-        }else if(state is WeekForecastLoadedState){
-          return WeekAndHoursWeatherSection(weekForecastEntity: state.responseWeekForecastEntity,);
-        }else if(state is CurrentWeatherErrorState){
+          _dispatchInit(context);
+          return const Center(
+              child: CupertinoActivityIndicator(color: Colors.red, radius: 25));
+        } else if (state is CurrentWeatherLoadingState) {
+          return const Center(
+              child:
+                  CupertinoActivityIndicator(color: Colors.green, radius: 25));
+        } else if (state is CurrentWeatherLoadedState) {
+          return CurrentWeatherBody(
+              responseCurrentWeatherEntity: state.responseCurrentWeatherEntity);
+        } else if (state is CurrentWeatherErrorState) {
           return ErrorWidget(state.errorMessage.toString());
         }
         return ErrorWidget("Unexpected Error occurred!");
-      },
-    ),
+      }),
     );
-
   }
 
+  BlocProvider<CurrentWeatherBloc> buildBottom() {
+    return BlocProvider(
+      create: (_) => bloc2,
+      child: BlocBuilder<CurrentWeatherBloc, CurrentWeatherState>(
+        builder: (context, state) {
+          if (state is CurrentWeatherInitial) {
+            _dispatchInit2(context);
+            return const Center(
+                child:
+                    CupertinoActivityIndicator(color: Colors.red, radius: 25));
+          } else if (state is CurrentWeatherLoadingState) {
+            return const Center(
+                child: CupertinoActivityIndicator(
+                    color: Colors.green, radius: 25));
+          } else if (state is WeekForecastLoadedState) {
+            return WeekAndHoursWeatherSection(
+              weekForecastEntity: state.responseWeekForecastEntity,
+            );
+          } else if (state is CurrentWeatherErrorState) {
+            return ErrorWidget(state.errorMessage.toString());
+          }
+          return ErrorWidget("Unexpected Error occurred!");
+        },
+      ),
+    );
+  }
 
   void _dispatchInit(context) {
     BlocProvider.of<CurrentWeatherBloc>(context)
-      .add(GetCurrentWeatherDataEvent());
+        .add(GetCurrentWeatherDataEvent());
   }
 
-  void _dispatchInit2(context){
+  void _dispatchInit2(context) {
     BlocProvider.of<CurrentWeatherBloc>(context)
         .add(GetWeekForecastDataEvent());
   }
-
-
 }

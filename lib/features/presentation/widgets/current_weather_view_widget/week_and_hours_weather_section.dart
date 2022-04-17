@@ -31,8 +31,9 @@ class _WeekAndHoursWeatherSectionState
             child: Column(
                 children: [
                   Padding(
-                    padding: EdgeInsets.symmetric(
-                      vertical: (height * 0.03),
+                    padding: EdgeInsets.only(
+                      bottom: (height * 0.017),
+                      top: (height * 0.03),
                     ),
                     child: Row(
                       children: [

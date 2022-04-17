@@ -16,7 +16,7 @@ class PlaceName extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(top: (height! * 0.015), bottom: (height! * 0.02)),
+      padding: EdgeInsets.only(top: (height! * 0.015), bottom: (height! * 0.03)),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
