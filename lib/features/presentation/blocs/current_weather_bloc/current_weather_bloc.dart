@@ -31,7 +31,7 @@ class CurrentWeatherBloc
         (r) => CurrentWeatherLoadedState(responseCurrentWeatherEntity: r),
       );
     } else if (event is GetWeekForecastDataEvent) {
-      yield CurrentWeatherLoadingState();
+      yield WeekForecastLoadingState();
       final failureOrWeekForecastData = await weekForecastUseCase(NoParams());
       yield failureOrWeekForecastData.fold(
         (l) => CurrentWeatherErrorState(errorMessage: _mapFailureToMessage(l)),

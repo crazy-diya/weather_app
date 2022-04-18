@@ -22,8 +22,7 @@ class CurrentWeatherRemoteDataSourceImpl extends CurrentWeatherRemoteDataSource 
 
   @override
   Future<ResponseCurrentWeatherModel> getCurrentWeatherDetails() async {
-    var response = await client?.get(Uri.parse(
-        '$baseUrl/weather?lat=37.39&lon=-122.08&appid=c48cc178df6fe970fbe9d5fd1d9e697c'));
+    var response = await client?.get(Uri.parse('$baseUrl/weather?lat=${AppConstant.lat}&lon=${AppConstant.lon}&appid=c48cc178df6fe970fbe9d5fd1d9e697c'));
     // print(response);
     if (response?.statusCode == 200) {
       var data = json.decode(response!.body);
@@ -37,8 +36,7 @@ class CurrentWeatherRemoteDataSourceImpl extends CurrentWeatherRemoteDataSource 
 
   @override
   Future<ResponseWeekForecastModel> getWeekForecastDetails() async {
-    var response = await client?.get(Uri.parse(
-        '$baseUrl/onecall?lat=37.39&lon=-122.08&exclude=alerts&appid=c48cc178df6fe970fbe9d5fd1d9e697c'));
+    var response = await client?.get(Uri.parse('$baseUrl/onecall?lat=${AppConstant.lat}&lon=${AppConstant.lon}&exclude=alerts&appid=c48cc178df6fe970fbe9d5fd1d9e697c'));
     // print(response);
     if (response?.statusCode == 200) {
       var data = json.decode(response!.body);

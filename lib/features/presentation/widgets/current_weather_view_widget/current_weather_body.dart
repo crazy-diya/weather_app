@@ -1,3 +1,4 @@
+import 'package:burevi2/core/constatnts/constants.dart';
 import 'package:burevi2/features/domain/entities/current_weather_entity/response_current_weather_entity.dart';
 import 'package:burevi2/features/presentation/widgets/current_weather_view_widget/place_name.dart';
 import 'package:flutter/cupertino.dart';
@@ -20,14 +21,14 @@ class CurrentWeatherBody extends StatefulWidget {
 }
 
 class _CurrentWeatherBodyState extends State<CurrentWeatherBody> {
-  String? country, locality;
+  // String? country, locality;
 
   @override
   void initState() {
     super.initState();
-    getCurrentLocationData();
+    // getCurrentLocationData();
   }
-
+/*
   getCurrentLocationData() async {
     Position position = await _determinePosition();
     await getAddressFromLatLong(position);
@@ -64,11 +65,16 @@ class _CurrentWeatherBodyState extends State<CurrentWeatherBody> {
     List<Placemark> placeMark =
         await placemarkFromCoordinates(position.latitude, position.longitude);
     Placemark place = placeMark[0];
+
+
+    AppConstant.lat = position.latitude;
+    AppConstant.lon = position.longitude;
+
     setState(() {
       country = place.country;
       locality = place.locality;
     });
-  }
+  }*/
 
   @override
   Widget build(BuildContext context) {
@@ -82,8 +88,8 @@ class _CurrentWeatherBodyState extends State<CurrentWeatherBody> {
                 children: [
                   PlaceName(
                     height: height,
-                    country: country.toString(),
-                    name: locality.toString(),
+                    country: AppConstant.country,
+                    name: AppConstant.locality,
                   ),
                   CurrentWeather(
                     height: height,

@@ -32,6 +32,11 @@ class CurrentWeatherErrorState extends CurrentWeatherState {
   List<Object> get props => [errorMessage!];
 }
 
+class WeekForecastLoadingState extends CurrentWeatherState {
+  @override
+  List<Object> get props => [];
+}
+
 class WeekForecastLoadedState extends CurrentWeatherState {
   final ResponseWeekForecastEntity? responseWeekForecastEntity;
 

@@ -14,3 +14,9 @@ const String baseUrl = "https://api.openweathermap.org/data/2.5";
 //http://openweathermap.org/img/wn/10d@2x.png
 const String weatherIconUrl = "http://openweathermap.org/img/wn";
 
+class AppConstant{
+  static double lat = 0.0000;
+  static double lon = 0.0000;
+  static String country='';
+  static String locality='';
+}
